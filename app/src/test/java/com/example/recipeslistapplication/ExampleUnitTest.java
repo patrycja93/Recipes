@@ -1,4 +1,4 @@
-package com.example.interviewapplication;
+package com.example.recipeslistapplication;
 
 import org.junit.Test;
 

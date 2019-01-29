@@ -1,12 +1,12 @@
-package com.example.interviewapplication.viewmodel;
+package com.example.recipeslistapplication.viewmodel;
 
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
 
-import com.example.interviewapplication.application.AppController;
-import com.example.interviewapplication.model.Recipe;
-import com.example.interviewapplication.network.RecipesResources;
+import com.example.recipeslistapplication.application.AppController;
+import com.example.recipeslistapplication.model.Recipe;
+import com.example.recipeslistapplication.network.ApiRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class RecipeViewModel extends Observable {
 
 
     public RecipeViewModel(Context context) {
-        this.recipeList = new ArrayList<>();
+        this.recipeList = new ArrayList<Recipe>();
         this.context = context;
     }
 
@@ -37,14 +37,14 @@ public class RecipeViewModel extends Observable {
     private void loadRecipeFromServer() {
 
         AppController appController = AppController.create(context);
-        RecipesResources recipesResources = appController.getService();
+        ApiRequest recipesResources = appController.getService();
 
         Disposable disposable = recipesResources.getRecipes()
                 .subscribeOn(appController.subscribeScheduler())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         this::updateRecipesList,
-                        throwable -> Log.d(TAG, "loadRecipeFromServer: " + throwable.getMessage()));
+                        throwable -> Log.d(TAG, throwable.getMessage()));
 
         compositeDisposable.add(disposable);
     }

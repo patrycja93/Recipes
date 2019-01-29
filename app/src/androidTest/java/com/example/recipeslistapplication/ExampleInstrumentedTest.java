@@ -1,4 +1,4 @@
-package com.example.interviewapplication;
+package com.example.recipeslistapplication;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
