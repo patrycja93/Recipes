@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme">
 
 
-        <activity android:name="com.example.recipeslistapplication.view.MainActivity">
+        <activity android:name="com.example.recipeslistapplication.view.activity.MainActivity"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

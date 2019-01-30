@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
 
     <data>
@@ -12,16 +14,29 @@
             type="com.example.recipeslistapplication.viewmodel.RecipeViewModel" />
     </data>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/acb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:layout_margin="@dimen/margin_button_get_recipes"
-        android:clickable="true"
-        android:focusable="true"
-        android:text="@string/get_recipes"
-        android:onClick="@{recipeViewModel::getRecipes}" />
+        <EditText
+            android:id="@+id/acb"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_edittext"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/margin_button_get_recipes"
+            android:clickable="true"
+            android:focusable="true"
+            android:hint="@string/searching" />
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_recipes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/acb"
+            android:scrollbars="vertical"
+            android:clipToPadding="false"
+            app:visibility="@{recipeViewModel.recipeRecycler}"
+            tools:listitem="@layout/recipe_item" />
+
+    </RelativeLayout>
 </layout>

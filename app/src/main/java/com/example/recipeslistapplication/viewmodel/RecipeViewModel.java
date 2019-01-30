@@ -1,6 +1,7 @@
 package com.example.recipeslistapplication.viewmodel;
 
 import android.content.Context;
+import android.databinding.ObservableInt;
 import android.util.Log;
 import android.view.View;
 
@@ -22,15 +23,19 @@ public class RecipeViewModel extends Observable {
 
     private Context context;
     private List<Recipe> recipeList;
+    public ObservableInt recipeRecycler;
+
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 
     public RecipeViewModel(Context context) {
-        this.recipeList = new ArrayList<Recipe>();
+        this.recipeList = new ArrayList<>();
         this.context = context;
+        recipeRecycler = new ObservableInt(View.GONE);
     }
 
-    public void getRecipes(View view) {
+    public void getRecipes() {
+        recipeRecycler.set(View.GONE);
         loadRecipeFromServer();
     }
 
@@ -44,12 +49,16 @@ public class RecipeViewModel extends Observable {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         this::updateRecipesList,
-                        throwable -> Log.d(TAG, throwable.getMessage()));
+                        throwable -> {
+                            Log.d(TAG, throwable.getMessage());
+                            recipeRecycler.set(View.GONE);
+                        });
 
         compositeDisposable.add(disposable);
     }
 
     private void updateRecipesList(List<Recipe> recipes) {
+        recipeRecycler.set(View.VISIBLE);
         recipeList.addAll(recipes);
         setChanged();
         notifyObservers();
@@ -65,5 +74,9 @@ public class RecipeViewModel extends Observable {
         unSubscribeFromObservable();
         compositeDisposable = null;
         context = null;
+    }
+
+    public List<Recipe> getRecipeList() {
+        return recipeList;
     }
 }

@@ -35,12 +35,4 @@ public class AppController extends Application {
         }
         return scheduler;
     }
-
-    public void setUserService(ApiRequest apiRequest) {
-        this.apiRequest = apiRequest;
-    }
-
-    public void setScheduler(Scheduler scheduler) {
-        this.scheduler = scheduler;
-    }
 }
