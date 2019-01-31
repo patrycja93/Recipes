@@ -40,5 +40,15 @@ public class Ingredient {
         this.elements = elements;
     }
 
+    public String getNameOfIngredientAndElements() {
+        String str = "";
+        str += name.equals("") ? "" : name + ":\n";
+        for(Element e: getElements()) {
+            str += e.getName() == null ? "" : e.getName() + " ";
+            str += e.getAmount() == null ? "" : e.getAmount()+ " ";
+            str += e.getSymbol() == null ? "\n" : e.getSymbol() + "\n";
+        }
+        return str + "\n";
+    }
 
 }

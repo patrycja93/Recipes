@@ -33,8 +33,8 @@ public class RecipeItem extends BaseObservable {
 
     public String getIngredientsToRecipe() {
         String str = "";
-            for (Element e :getElement())
-                str += e.geElementsToRecipe();
+            for (Ingredient i :getIngredients())
+                str += i.getNameOfIngredientAndElements();
         return str;
     }
 
@@ -49,7 +49,6 @@ public class RecipeItem extends BaseObservable {
 
         return elementsList;
     }
-
 
     @BindingAdapter("imageRecipe")
     public static void setImageUrl(ImageView imageView, String url) {

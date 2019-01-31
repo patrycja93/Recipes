@@ -31,7 +31,7 @@ public class Element {
     }
 
     public void setAmount(String amount) {
-        this.amount = amount;
+        this.amount = amount == null ? "" : amount;
     }
 
     public String getHint() {
@@ -39,7 +39,7 @@ public class Element {
     }
 
     public void setHint(String hint) {
-        this.hint = hint;
+        this.hint = hint == null ? "" : hint;
     }
 
     public String getName() {
@@ -47,7 +47,7 @@ public class Element {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name == null ? "" : name;
     }
 
     public String getSymbol() {
@@ -55,11 +55,15 @@ public class Element {
     }
 
     public void setSymbol(String symbol) {
-        this.symbol = symbol;
+        this.symbol = symbol == null ? "" : symbol;
     }
 
     public String geElementsToRecipe() {
-        return name + " " + amount + " " + symbol + "\n";
+        String str = "";
+        str += name == null ? "" : name + " ";
+        str += amount == null ? "" : amount + " ";
+        str += symbol == null ? "" : symbol + " ";
+        return str + "\n";
     }
 
 }
