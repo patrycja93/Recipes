@@ -1,21 +1,19 @@
 package com.example.recipeslistapplication.model;
 
+import java.util.List;
+
 public class Ingredient {
     private String id;
-    private String amount;
-    private String hint;
     private String name;
-    private String symbol;
+    private List<Element> elements;
 
     public Ingredient() {
     }
 
-    public Ingredient(String id, String amount, String hint, String name, String symbol) {
+    public Ingredient(String id, String name, List<Element> elements) {
         this.id = id;
-        this.amount = amount;
-        this.hint = hint;
         this.name = name;
-        this.symbol = symbol;
+        this.elements = elements;
     }
 
     public String getId() {
@@ -26,22 +24,6 @@ public class Ingredient {
         this.id = id;
     }
 
-    public String getAmount() {
-        return amount;
-    }
-
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-
-    public String getHint() {
-        return hint;
-    }
-
-    public void setHint(String hint) {
-        this.hint = hint;
-    }
-
     public String getName() {
         return name;
     }
@@ -50,11 +32,13 @@ public class Ingredient {
         this.name = name;
     }
 
-    public String getSymbol() {
-        return symbol;
+    public List<Element> getElements() {
+        return elements;
     }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
+    public void setElements(List<Element> elements) {
+        this.elements = elements;
     }
+
+
 }
