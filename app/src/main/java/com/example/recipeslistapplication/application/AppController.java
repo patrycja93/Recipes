@@ -22,9 +22,10 @@ public class AppController extends Application {
         return AppController.get(context);
     }
 
-    public ApiRequest getService() {
+    public ApiRequest getService(Context context) {
         if (apiRequest == null) {
-            apiRequest = RetrofitRequest.create();
+            RetrofitRequest retrofitRequest = new RetrofitRequest();
+            apiRequest = retrofitRequest.create(context);
         }
         return apiRequest;
     }

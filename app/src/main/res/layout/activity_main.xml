@@ -18,8 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/acb"
+        <android.support.v7.widget.SearchView
+            android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_edittext"
             android:layout_centerHorizontal="true"
@@ -32,7 +32,7 @@
             android:id="@+id/list_recipes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/acb"
+            android:layout_below="@id/search"
             android:scrollbars="vertical"
             android:clipToPadding="false"
             app:visibility="@{recipeViewModel.recipeRecycler}"

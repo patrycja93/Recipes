@@ -42,7 +42,7 @@ public class RecipeViewModel extends Observable {
     private void loadRecipeFromServer() {
 
         AppController appController = AppController.create(context);
-        ApiRequest recipesResources = appController.getService();
+        ApiRequest recipesResources = appController.getService(context);
 
         Disposable disposable = recipesResources.getRecipes()
                 .subscribeOn(appController.subscribeScheduler())

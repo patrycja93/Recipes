@@ -11,6 +11,7 @@ import com.example.recipeslistapplication.viewmodel.RecipeViewModel;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 
 
 import java.util.Observable;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
     private ActivityMainBinding activityMainBinding;
     private RecipeViewModel recipeViewModel;
+    private RecipeAdapter recipeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +29,26 @@ public class MainActivity extends AppCompatActivity implements Observer {
         initDataBinding();
         setUpListOfUsersView(activityMainBinding.listRecipes);
         setUpObserver(recipeViewModel);
-
         recipeViewModel.getRecipes();
+
+        activityMainBinding.search.setActivated(true);
+        activityMainBinding.search.setQueryHint("Enter text to search");
+        activityMainBinding.search.onActionViewExpanded();
+        activityMainBinding.search.setIconified(false);
+        activityMainBinding.search.clearFocus();
+
+        activityMainBinding.search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                recipeAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
     }
 
     private void initDataBinding() {
@@ -38,8 +58,8 @@ public class MainActivity extends AppCompatActivity implements Observer {
     }
 
     private void setUpListOfUsersView(RecyclerView recipesList) {
-        RecipeAdapter userAdapter = new RecipeAdapter();
-        recipesList.setAdapter(userAdapter);
+        recipeAdapter = new RecipeAdapter();
+        recipesList.setAdapter(recipeAdapter);
         recipesList.setLayoutManager(new LinearLayoutManager(this));
     }
 
@@ -56,9 +76,9 @@ public class MainActivity extends AppCompatActivity implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         if(o instanceof  RecipeViewModel) {
-            RecipeAdapter userAdapter = (RecipeAdapter) activityMainBinding.listRecipes.getAdapter();
+            RecipeAdapter recipeAdapter = (RecipeAdapter) activityMainBinding.listRecipes.getAdapter();
             RecipeViewModel recipeViewModel = (RecipeViewModel) o;
-            userAdapter.setRecipeList(recipeViewModel.getRecipeList());
+            recipeAdapter.setRecipeList(recipeViewModel.getRecipeList());
         }
     }
 }
