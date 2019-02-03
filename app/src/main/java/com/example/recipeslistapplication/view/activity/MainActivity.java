@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initDataBinding();
-        setUpListOfUsersView(activityMainBinding.listRecipes);
+        setUpListView(activityMainBinding.listRecipes);
         setUpObserver(recipeViewModel);
         recipeViewModel.getRecipes();
 
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
         activityMainBinding.setRecipeViewModel(recipeViewModel);
     }
 
-    private void setUpListOfUsersView(RecyclerView recipesList) {
+    private void setUpListView(RecyclerView recipesList) {
         recipeAdapter = new RecipeAdapter();
         recipesList.setAdapter(recipeAdapter);
         recipesList.setLayoutManager(new LinearLayoutManager(this));
